@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    dataBinding {
+        enabled = true
+    }
+
     compileSdkVersion 22
     buildToolsVersion "23.0.2"
 
@@ -35,7 +39,9 @@ dependencies {
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.8.2'    // For appcompat-v7 bindings
     compile 'com.github.kittinunf.fuel:fuel-android:1.0.0'  //http framework
     compile 'com.github.salomonbrys.kotson:kotson:2.1.0'    //kotlin lib for GSON
-    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.balysv.materialmenu:material-menu-toolbar:1.5.4'
+    compile 'com.balysv.materialmenu:material-menu:1.5.4'
+    kapt 'com.android.databinding:compiler:1.0-rc5'
 }
 
 buildscript {
@@ -50,4 +56,8 @@ buildscript {
 
 repositories {
     mavenCentral()
+}
+
+kapt {
+    generateStubs = true
 }

@@ -1,11 +1,13 @@
 package com.thierry.beaconfire.service
 
+import android.webkit.CookieManager
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpDelete
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.fuel.httpPut
+import com.github.kittinunf.fuel.core.Manager
 import org.jetbrains.anko.*
 
 /** @brief API状态枚举 */
@@ -35,10 +37,11 @@ enum class HttpMethod {
  */
 class GMNetService {
 
-    val TAG = GMNetService.javaClass.canonicalName
+    val cookieManager: CookieManager = CookieManager.getInstance()
+
+    val TAG = GMNetService::class.java.canonicalName
 
     var apiHost: String = ""
-    var urlCommonParameters: String = ""
 
     private object Holder {
         val INSTANCE = GMNetService()
@@ -48,9 +51,10 @@ class GMNetService {
         val instance: GMNetService by lazy { Holder.INSTANCE }
     }
 
-    fun doRequest(url: String, method: HttpMethod, params: List<Pair<String, Any?>>?, success: (Response) -> Unit, failed: (String) -> Unit) {
+    fun doRequest(remoteUrl: String, method: HttpMethod, params: List<Pair<String, Any?>>?, success: (Response) -> Unit, failed: (String) -> Unit) {
         async() {
-            val remoteUrl = apiHost + url + urlCommonParameters
+            Manager.instance.basePath = apiHost
+            Manager.instance.baseHeaders = mapOf("Cookie" to cookieManager.getCookie(apiHost))
             when (method) {
                 HttpMethod.HttpMethodGet ->
                     remoteUrl.httpGet(params).responseJson { request, response, result ->
