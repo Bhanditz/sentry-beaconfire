@@ -1,4 +1,4 @@
-# sentry-beaconfire
+# Sentry Beaconfire
 Kotlin based getsentry/sentry android client, now you can care about your server's error logging and aggregation over the android phone.
 
 ## About Sentry
@@ -12,7 +12,7 @@ Kotlin based getsentry/sentry android client, now you can care about your server
 * Track issues in a project and see more detail.
 
 ## How to use
-Simply replace the defaults with your own sentry server host and organization in Constants.swift
+Simply replace the defaults with your own sentry server host and organization in Constants.kt
 ```kotlin
 // Default Organization
 val CurrentOrganization = "YOUR_Organization"
