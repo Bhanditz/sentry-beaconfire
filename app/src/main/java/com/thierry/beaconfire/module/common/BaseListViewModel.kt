@@ -3,16 +3,22 @@ package com.thierry.beaconfire.module.common
 import android.databinding.BaseObservable
 import android.databinding.ObservableField
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import com.google.gson.Gson
+import com.thierry.beaconfire.model.IssueBean
+import com.thierry.beaconfire.module.project.EventDetailActivity
 import com.thierry.beaconfire.service.GMNetService
 import com.thierry.beaconfire.service.HttpMethod
+import org.jetbrains.anko.startActivity
 import java.io.Serializable
+import java.text.FieldPosition
 
 /**
  * Created by Thierry on 16/3/11.
  */
 
-abstract class BaseListViewModel : BaseObservable(), Serializable {
+abstract class BaseListViewModel : BaseObservable(), Serializable, AdapterView.OnItemClickListener {
 
     val TAG = this.javaClass.canonicalName
     var remoteUrl = ""
@@ -51,6 +57,10 @@ abstract class BaseListViewModel : BaseObservable(), Serializable {
     abstract fun buildRemoteUrl()
 
     abstract fun buildParams()
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, item: Long) {
+        throw UnsupportedOperationException()
+    }
 
     enum class FetchDataResult() {
         Normal,

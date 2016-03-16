@@ -26,7 +26,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:lines="1"
-            android:onClick="@{viewModel.getHandler(position).onItemClick}"
             android:text="@{viewModel.getName(position)}"
             android:textColor="@color/FontBlack"
             android:textSize="16sp"/>
@@ -42,5 +41,4 @@
             android:textSize="14sp"/>
 
     </RelativeLayout>
-
 </layout>
