@@ -6,4 +6,4 @@ package com.thierry.beaconfire.model
 data class OrganizationBean(val slug: String,
                             val dateCreated: String,
                             val id: String,
-                            val name: String)
+                            val name: String) : BaseBean

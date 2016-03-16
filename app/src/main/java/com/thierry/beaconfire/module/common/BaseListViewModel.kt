@@ -6,16 +6,16 @@ import android.util.Log
 import com.google.gson.Gson
 import com.thierry.beaconfire.service.GMNetService
 import com.thierry.beaconfire.service.HttpMethod
+import java.io.Serializable
 
 /**
  * Created by Thierry on 16/3/11.
  */
 
-abstract class BaseListViewModel : BaseObservable() {
+abstract class BaseListViewModel : BaseObservable(), Serializable {
 
     val TAG = this.javaClass.canonicalName
     var remoteUrl = ""
-    val gson = Gson()
     var message = ""
     var cursor = ""
     var params: List<Pair<String, Any?>>? = null
@@ -26,12 +26,12 @@ abstract class BaseListViewModel : BaseObservable() {
     fun fetchRemoteData() {
         this.buildRemoteUrl()
         this.buildParams()
+        fetchDataResult.set(FetchDataResult.Normal)
         GMNetService.instance.doRequest(remoteUrl, HttpMethod.HttpMethodGet, params, { response ->
             Log.d(TAG, "remoteUrl" + remoteUrl)
             if (remoteUrl == "") {
                 fetchDataResult.set(FetchDataResult.Failed)
             }
-
             try {
                 val jsonString: String = String(response.data)
                 buildData(jsonString)
@@ -41,7 +41,6 @@ abstract class BaseListViewModel : BaseObservable() {
                 message = "Fetch Data Error"
             }
         }, { error ->
-            Log.d(TAG, "error" + error)
             fetchDataResult.set(FetchDataResult.Failed)
             message = error
         })

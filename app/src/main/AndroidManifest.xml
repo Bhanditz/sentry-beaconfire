@@ -28,6 +28,10 @@
             android:name=".module.MainActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".module.project.EventDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
     </application>
 

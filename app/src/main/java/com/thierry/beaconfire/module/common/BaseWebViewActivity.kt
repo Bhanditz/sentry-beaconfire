@@ -29,11 +29,18 @@ open class BaseWebViewActivity() : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
-
+        this.parseBundle()
         val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true
         webView.setWebViewClient(WebViewClientBase(this))
-        webView.loadUrl(Constants.Host + url);
+        webView.loadUrl(url);
+    }
+
+    fun parseBundle() {
+        val url: String? = this.intent.getStringExtra("url")
+        if (url != null && url != "") {
+            this.url = url
+        }
     }
 
     open fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {

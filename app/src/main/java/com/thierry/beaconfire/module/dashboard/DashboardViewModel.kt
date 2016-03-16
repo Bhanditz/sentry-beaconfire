@@ -1,6 +1,8 @@
 package com.thierry.beaconfire.module.dashboard
 
+import android.content.Context
 import com.github.salomonbrys.kotson.fromJson
+import com.google.gson.Gson
 import com.thierry.beaconfire.model.IssueBean
 import com.thierry.beaconfire.module.common.BaseListViewModel
 import com.thierry.beaconfire.util.Constants
@@ -14,8 +16,9 @@ class DashboardViewModel(val type: String = "Assigned") : BaseListViewModel() {
     val per_page = 5
     val status = "unresolved"
 
+
     override fun buildData(dataString: String) {
-        dataArray = gson.fromJson<List<IssueBean>>(dataString)
+        dataArray = Gson().fromJson<List<IssueBean>>(dataString)
     }
 
     override fun buildRemoteUrl() {
@@ -30,6 +33,11 @@ class DashboardViewModel(val type: String = "Assigned") : BaseListViewModel() {
         params = listOf(Pair("cursor", cursor), Pair("statsPeriod", statsPeriod), Pair("per_page", per_page), Pair("status", status))
     }
 
+    fun getHandler(position: Int): DashboardHandler {
+        val issue: IssueBean = dataArray[position] as IssueBean
+        return DashboardHandler(issue)
+    }
+
     fun getName(position: Int): String {
         val issue: IssueBean = dataArray[position] as IssueBean
         return issue.title
@@ -40,8 +48,5 @@ class DashboardViewModel(val type: String = "Assigned") : BaseListViewModel() {
         return "[${issue.project.name})] ${issue.culprit}"
     }
 
-    fun getPermalink(position: Int): String {
-        val issue: IssueBean = dataArray[position] as IssueBean
-        return issue.permalink
-    }
+
 }

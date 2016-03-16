@@ -11,6 +11,4 @@ data class ProjectBean(val slug: String,
                        val team: TeamBean,
                        val dateCreated: String,
                        val id: String,
-                       val name: String) {
-
-}
+                       val name: String) : BaseBean

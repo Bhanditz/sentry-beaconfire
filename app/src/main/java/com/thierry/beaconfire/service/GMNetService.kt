@@ -1,5 +1,8 @@
 package com.thierry.beaconfire.service
 
+import android.content.Intent
+import android.support.v4.content.LocalBroadcastManager
+import android.util.Log
 import android.webkit.CookieManager
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.Response
@@ -8,14 +11,9 @@ import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.fuel.httpPut
 import com.github.kittinunf.fuel.core.Manager
+import com.thierry.beaconfire.App
+import com.thierry.beaconfire.util.Constants
 import org.jetbrains.anko.*
-
-/** @brief API状态枚举 */
-enum class APIStatusCode(val code: Int) {
-    APIStatusCodeSuccess(0),
-    APIStatusCodeEmpty(1),
-    APIStatusCodeFailed(2)
-};
 
 /** @brief Http状态枚举 */
 enum class HttpStatusCode(val code: Int) {
@@ -35,13 +33,12 @@ enum class HttpMethod {
 /**
  * Created by Thierry on 16/2/25.
  */
-class GMNetService {
+class GMNetService private constructor() {
 
+    val localBroadcastManager = LocalBroadcastManager.getInstance(App.instance);
     val cookieManager: CookieManager = CookieManager.getInstance()
-
     val TAG = GMNetService::class.java.canonicalName
-
-    var apiHost: String = ""
+    var apiHost: String = Constants.Host
 
     private object Holder {
         val INSTANCE = GMNetService()
@@ -52,8 +49,8 @@ class GMNetService {
     }
 
     fun doRequest(remoteUrl: String, method: HttpMethod, params: List<Pair<String, Any?>>?, success: (Response) -> Unit, failed: (String) -> Unit) {
+        Log.d(TAG, remoteUrl)
         async() {
-            Manager.instance.basePath = apiHost
             Manager.instance.baseHeaders = mapOf("Cookie" to cookieManager.getCookie(apiHost))
             when (method) {
                 HttpMethod.HttpMethodGet ->
@@ -86,14 +83,22 @@ class GMNetService {
     }
 
     fun handleResponse(response: Response, success: (Response) -> Unit, failed: (String) -> Unit) {
+        Log.d(TAG, "handleResponse")
         val statusCode = response.httpStatusCode
         if (statusCode == HttpStatusCode.HttpStatusCodeSuccess.code) {
             success(response)
         } else if (statusCode == HttpStatusCode.HttpStatusCodeUnauthorized.code) {
-            failed("没有权限")
+            Log.d(TAG, "HttpStatusCode.HttpStatusCodeUnauthorized")
+            this.sendLoginExpired()
         } else {
-            failed("网络错误")
+            failed("Request Data Error")
         }
+    }
+
+    fun sendLoginExpired() {
+        val intent: Intent = Intent();
+        intent.action = Constants.Broadcast.LoginExpired
+        localBroadcastManager.sendBroadcast(intent)
     }
 
 }

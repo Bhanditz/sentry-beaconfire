@@ -10,6 +10,7 @@
         <variable
             name="position"
             type="Integer"/>
+
     </data>
 
     <RelativeLayout
@@ -19,12 +20,13 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/issue_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:lines="1"
+            android:onClick="@{viewModel.getHandler(position).onItemClick}"
             android:text="@{viewModel.getName(position)}"
             android:textColor="@color/FontBlack"
             android:textSize="16sp"/>
@@ -33,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/title"
+            android:layout_below="@id/issue_title"
             android:lines="1"
             android:text="@{viewModel.getDetail(position)}"
             android:textColor="@color/FontGray"

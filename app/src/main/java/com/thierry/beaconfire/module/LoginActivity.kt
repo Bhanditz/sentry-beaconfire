@@ -18,7 +18,7 @@ class LoginActivity : BaseWebViewActivity() {
     }
 
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-        if (url == Constants.Host + Constants.Web.Root) {
+        if (url == Constants.Web.Root) {
             startActivity<MainActivity>()
             finish()
             return false

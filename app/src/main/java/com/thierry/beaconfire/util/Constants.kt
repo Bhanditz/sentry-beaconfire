@@ -12,20 +12,20 @@ object Constants {
     val Host = "http://sentry.gengmei.cc"
 
     object Web {
-        val Root = "/"
-        val Login = "/auth/login/sentry/"
-        val Stats = "/organizations/#{CurrentOrganization}/stats/"
+        val Root = Host + "/"
+        val Login = Host + "/auth/login/sentry/"
+        val Stats = Host + "/organizations/#{CurrentOrganization}/stats/"
     }
 
     object API {
-        val Organizations = "/api/0/organizations/"
-        val Projects = "/api/0/organizations/${Constants.CurrentOrganization}/projects/"
-        val New = "/api/0/organizations/${Constants.CurrentOrganization}/issues/new/"
-        val Assigned = "/api/0/organizations/${Constants.CurrentOrganization}/members/me/issues/assigned/"
-        val Events = "/api/0/projects/${Constants.CurrentOrganization}/%s/issues/"
+        val Organizations = Host + "/api/0/organizations/"
+        val Projects = Host + "/api/0/organizations/${Constants.CurrentOrganization}/projects/"
+        val New = Host + "/api/0/organizations/${Constants.CurrentOrganization}/issues/new/"
+        val Assigned = Host + "/api/0/organizations/${Constants.CurrentOrganization}/members/me/issues/assigned/"
+        val Events = Host + "/api/0/projects/${Constants.CurrentOrganization}/%s/issues/"
     }
 
-    object Notification {
+    object Broadcast {
         val LoginExpired = "LoginExpired"
     }
 }

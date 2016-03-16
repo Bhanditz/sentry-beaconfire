@@ -1,8 +1,13 @@
 package com.thierry.beaconfire.module
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.util.Log
 import android.graphics.Color;
 import android.os.Bundle
+import android.support.v4.content.LocalBroadcastManager
 import android.support.v4.widget.DrawerLayout
 import android.widget.ArrayAdapter
 import com.thierry.beaconfire.module.dashboard.DashboardFragment
@@ -20,6 +25,7 @@ import org.jetbrains.anko.onItemClick
 import android.support.v4.widget.DrawerLayout.DrawerListener
 import android.view.View
 import com.balysv.materialmenu.MaterialMenuDrawable
+import com.thierry.beaconfire.util.Constants
 
 class MainActivity : BaseActivity(), DrawerListener {
 
@@ -30,11 +36,17 @@ class MainActivity : BaseActivity(), DrawerListener {
     val mDrawerList: ListView by bindView(R.id.left_drawer);
     val mFragments: List<BaseFragment> = listOf(DashboardFragment(), ProjectFragment(), StatsFragment(), SettingsFragment())
 
+    var localBroadcastManager: LocalBroadcastManager? = null
+    var mBroadcastReceiver: AuthBroadcastReceiver? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        this.drawLeftDrawer()
+        this.registerBroadcast()
+    }
 
-        Log.d(TAG, actionBar.toString())
+    fun drawLeftDrawer() {
         materialMenu = MaterialMenuIcon(this, Color.WHITE, Stroke.THIN);
         mFragmentTitles = this.resources.getStringArray(R.array.tabs)
         mDrawerList.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mFragmentTitles)
@@ -43,6 +55,14 @@ class MainActivity : BaseActivity(), DrawerListener {
         }
         this.selectItem(0)
         mDrawerLayout.setDrawerListener(this)
+    }
+
+    fun registerBroadcast() {
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        mBroadcastReceiver = AuthBroadcastReceiver(this)
+        val intentFilter: IntentFilter = IntentFilter();
+        intentFilter.addAction(Constants.Broadcast.LoginExpired);
+        localBroadcastManager?.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 
     fun selectItem(position: Int) {
@@ -84,6 +104,21 @@ class MainActivity : BaseActivity(), DrawerListener {
                 materialMenu?.state = MaterialMenuDrawable.IconState.ARROW
             } else {
                 materialMenu?.state = MaterialMenuDrawable.IconState.BURGER
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy();
+        localBroadcastManager?.unregisterReceiver(mBroadcastReceiver);
+    }
+
+    class AuthBroadcastReceiver(val context: Context) : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent?) {
+            if (intent?.action == Constants.Broadcast.LoginExpired) {
+                val mIntent: Intent = Intent(context, LoginActivity::class.java);
+                mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(mIntent);
             }
         }
     }
