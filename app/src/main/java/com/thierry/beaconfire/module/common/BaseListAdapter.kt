@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.thierry.beaconfire.BR
-import com.thierry.beaconfire.module.dashboard.DashboardHandler
 
 /**
  * Created by Thierry on 16/3/12.

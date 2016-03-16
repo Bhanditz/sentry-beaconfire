@@ -14,7 +14,7 @@ object Constants {
     object Web {
         val Root = Host + "/"
         val Login = Host + "/auth/login/sentry/"
-        val Stats = Host + "/organizations/#{CurrentOrganization}/stats/"
+        val Stats = Host + "/organizations/${Constants.CurrentOrganization}/stats/"
     }
 
     object API {

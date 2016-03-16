@@ -42,7 +42,6 @@ abstract class BaseFragment : Fragment() {
         val fragmentManager = childFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(layoutId, fragment, tag)
-        transaction.addToBackStack(null)
         transaction.commitAllowingStateLoss()
         fragmentManager.executePendingTransactions()
     }

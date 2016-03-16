@@ -45,7 +45,6 @@ abstract class BaseActivity : FragmentActivity() {
         val fragmentManager = supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(layoutId, fragment, tag)
-        transaction.addToBackStack(tag)
         transaction.commitAllowingStateLoss()
         fragmentManager.executePendingTransactions()
     }

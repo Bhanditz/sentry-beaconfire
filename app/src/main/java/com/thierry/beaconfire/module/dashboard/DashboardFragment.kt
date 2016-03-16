@@ -34,7 +34,7 @@ class DashboardFragment : BaseFragment() {
     fun addTab(type: String) {
         var bundle = Bundle()
         bundle.putSerializable("ViewModel", DashboardViewModel(type))
-        bundle.putInt("LayoutId", R.layout.listitem_dashboard)
+        bundle.putInt("ItemLayoutId", R.layout.listitem_dashboard)
         mTabHost?.addTab(mTabHost?.newTabSpec(type)?.setIndicator(type),
                 BaseListFragment::class.java, bundle)
     }

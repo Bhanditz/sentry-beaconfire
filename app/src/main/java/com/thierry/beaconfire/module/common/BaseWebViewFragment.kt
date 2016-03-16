@@ -2,6 +2,7 @@ package com.thierry.beaconfire.module.common
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.support.v4.app.FragmentTabHost
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,37 +21,30 @@ import org.jetbrains.anko.*
  * Created by Thierry on 16/3/10.
  */
 
-open class BaseWebViewActivity() : BaseActivity() {
+open class BaseWebViewFragment(val url: String, val webViewBlock: (url: String) -> Boolean?) : BaseFragment() {
 
-    val webView: WebView by bindView<WebView>(R.id.web_view)
-
-    open var url: String = ""
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_webview)
-        this.parseBundle()
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater?.inflate(R.layout.fragment_webview, container, false);
+        val webView: WebView = view!!.find<WebView>(R.id.web_view)
         val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true
         webView.setWebViewClient(WebViewClientBase(this))
         webView.loadUrl(url);
+        return view
     }
 
-    fun parseBundle() {
-        val url: String? = this.intent.getStringExtra("url")
-        if (url != null && url != "") {
-            this.url = url
+    fun shouldOverrideUrlLoading(url: String): Boolean {
+        if (webViewBlock != null) {
+            return webViewBlock(url)!!
+        } else {
+            return true
         }
     }
 
-    open fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-        return true
-    }
-
-    private class WebViewClientBase(var context: BaseWebViewActivity) : WebViewClient() {
+    private class WebViewClientBase(var context: BaseWebViewFragment) : WebViewClient() {
 
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-            return context.shouldOverrideUrlLoading(view, url)
+            return context.shouldOverrideUrlLoading(url)
         }
 
 
@@ -67,6 +61,7 @@ open class BaseWebViewActivity() : BaseActivity() {
         override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
             super.onReceivedError(view, errorCode, description, failingUrl);
             context.hideLoading()
+            context.toast(description)
         }
 
 

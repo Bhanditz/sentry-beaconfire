@@ -22,7 +22,7 @@ class BaseListFragment() : BaseFragment() {
 
     var listView: ListView? = null
     var viewModel: BaseListViewModel? = null
-    var layoutId: Int? = null
+    var itemLayoutId: Int? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.initParams()
@@ -32,9 +32,21 @@ class BaseListFragment() : BaseFragment() {
         return view
     }
 
+    fun setViewModel(viewModel: BaseListViewModel): BaseListFragment {
+        this.viewModel = viewModel
+        return this
+    }
+
+    fun setItemLayoutId(itemLayoutId: Int): BaseListFragment {
+        this.itemLayoutId = itemLayoutId
+        return this
+    }
+
     fun initParams() {
-        viewModel = this.arguments.getSerializable("ViewModel") as BaseListViewModel
-        layoutId = this.arguments.getInt("LayoutId")
+        if (this.arguments != null) {
+            viewModel = this.arguments.getSerializable("ViewModel") as BaseListViewModel
+            itemLayoutId = this.arguments.getInt("ItemLayoutId")
+        }
     }
 
     fun initBinding(inflater: LayoutInflater?, container: ViewGroup?): View {
@@ -63,7 +75,7 @@ class BaseListFragment() : BaseFragment() {
         if (newValue == FetchDataResult.Success) {
             hideLoading()
             if (viewModel!!.dataArray.count() > 0) {
-                listView?.adapter = BaseListAdapter(this, viewModel!!, layoutId!!)
+                listView?.adapter = BaseListAdapter(this, viewModel!!, itemLayoutId!!)
             } else {
                 toast("Nothing to show here, move along")
             }
