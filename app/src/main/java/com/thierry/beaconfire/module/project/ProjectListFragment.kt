@@ -11,7 +11,7 @@ import com.thierry.beaconfire.module.common.BaseListFragment
 /**
  * Created by Thierry on 16/3/9.
  */
-class ProjectFragment : BaseFragment() {
+class ProjectListFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_projects, container, false);

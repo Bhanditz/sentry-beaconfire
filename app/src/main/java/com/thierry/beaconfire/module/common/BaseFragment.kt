@@ -17,11 +17,18 @@ abstract class BaseFragment : Fragment() {
     var dialog: ProgressDialog? = null
 
     fun showLoading() {
-        dialog = ProgressDialog.show(activity, null, "Loading...")
+        if (activity != null) {
+            dialog = ProgressDialog.show(activity, null, "Loading...")
+        }
     }
 
     fun hideLoading() {
-        dialog?.dismiss()
+        try {
+            if (dialog != null && dialog!!.isShowing) {
+                dialog?.dismiss()
+            }
+        } catch(e: Exception) {
+        }
     }
 
     fun toast(message: String) {

@@ -17,7 +17,7 @@ import com.balysv.materialmenu.MaterialMenuIcon
 import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseActivity
 import com.thierry.beaconfire.common.BaseFragment
-import com.thierry.beaconfire.module.project.ProjectFragment
+import com.thierry.beaconfire.module.project.ProjectListFragment
 import com.thierry.beaconfire.module.settings.SettingsFragment
 import com.thierry.beaconfire.module.stats.StatsFragment
 import com.thierry.beaconfire.util.bindView
@@ -34,7 +34,7 @@ class MainActivity : BaseActivity(), DrawerListener {
     val mDrawerLayout: DrawerLayout by bindView(R.id.drawer_layout)
     var mFragmentTitles: Array<String>? = null
     val mDrawerList: ListView by bindView(R.id.left_drawer);
-    val mFragments: List<BaseFragment> = listOf(DashboardFragment(), ProjectFragment(), StatsFragment(), SettingsFragment())
+    val mFragments: List<BaseFragment> = listOf(DashboardFragment(), ProjectListFragment(), StatsFragment(), SettingsFragment())
 
     var localBroadcastManager: LocalBroadcastManager? = null
     var mBroadcastReceiver: AuthBroadcastReceiver? = null
