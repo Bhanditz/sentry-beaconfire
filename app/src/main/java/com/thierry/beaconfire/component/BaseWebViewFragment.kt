@@ -1,4 +1,4 @@
-package com.thierry.beaconfire.module.common
+package com.thierry.beaconfire.component
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -61,7 +61,7 @@ open class BaseWebViewFragment(val url: String, val webViewBlock: (url: String) 
         override fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
             super.onReceivedError(view, errorCode, description, failingUrl);
             context.hideLoading()
-            context.toast(description)
+            context.toastShow(description)
         }
 
 

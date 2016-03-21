@@ -9,4 +9,8 @@
     <color name="FontBlue">#1d87ce</color>
     <color name="FontGray">#546076</color>
     <color name="FontLightGray">#6f7e94</color>
+    <color name="LevelError">#ec5b33</color>
+    <color name="LevelInfo">#25a6f7</color>
+    <color name="LevelWarning">#f6d846</color>
+    <color name="LevelDefault">#546076</color>
 </resources>

@@ -3,7 +3,7 @@ package com.thierry.beaconfire.module.project
 import android.os.Bundle
 import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseActivity
-import com.thierry.beaconfire.module.common.BaseWebViewFragment
+import com.thierry.beaconfire.component.BaseWebViewFragment
 import com.thierry.beaconfire.util.Constants
 
 /**

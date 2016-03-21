@@ -3,6 +3,7 @@ package com.thierry.beaconfire.module
 import android.os.Bundle
 import android.util.Log
 import android.webkit.CookieManager
+import com.thierry.beaconfire.App
 import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseActivity
 import com.thierry.beaconfire.util.Constants
@@ -14,8 +15,6 @@ import org.jetbrains.anko.uiThread
  * Created by Thierry on 16/3/11.
  */
 class LaunchActivity : BaseActivity() {
-
-    val cookieManager: CookieManager = CookieManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +29,7 @@ class LaunchActivity : BaseActivity() {
     }
 
     fun checkLoginStatus() {
-        val cookie = cookieManager.getCookie(Constants.Host)
-        Log.d(TAG, "cookie" + cookie)
-        if (cookie != null && cookie.contains("sentrysid") && cookie.contains("sudo")) {
+        if (App.instance.cookieExist()) {
             this.showMainView()
         } else {
             this.showLoginView()
@@ -45,11 +42,8 @@ class LaunchActivity : BaseActivity() {
     }
 
     fun showLoginView() {
-        this.cleanCookie()
+        App.instance.cleanCookie()
         startActivity<LoginActivity>()
     }
 
-    fun cleanCookie() {
-        cookieManager.setCookie(Constants.Host, null)
-    }
 }

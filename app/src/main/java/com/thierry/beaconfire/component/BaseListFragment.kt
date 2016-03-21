@@ -1,4 +1,4 @@
-package com.thierry.beaconfire.module.common
+package com.thierry.beaconfire.component
 
 import android.databinding.DataBindingUtil
 import android.databinding.Observable
@@ -11,8 +11,11 @@ import android.widget.ListView
 import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseFragment
 import com.thierry.beaconfire.databinding.FragmentListBinding
+import com.thierry.beaconfire.module.common.BaseListAdapter
+import com.thierry.beaconfire.module.common.BaseListViewModel
 import com.thierry.beaconfire.module.common.BaseListViewModel.FetchDataResult
 import org.jetbrains.anko.find
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * Created by Thierry on 16/3/11.
@@ -71,17 +74,18 @@ class BaseListFragment() : BaseFragment() {
     }
 
     fun observeHandler(newValue: FetchDataResult) {
-        Log.d(TAG, "newValue" + newValue)
         if (newValue == FetchDataResult.Success) {
             hideLoading()
             if (viewModel!!.dataArray.count() > 0) {
                 listView?.adapter = BaseListAdapter(this, viewModel!!, itemLayoutId!!)
             } else {
-                toast("Nothing to show here, move along")
+                toastShow("Nothing to show here, move along")
             }
         } else if (newValue == FetchDataResult.Failed) {
             hideLoading()
-            toast("Get data failed")
+            toastShow("Get data failed")
+        } else {
+            hideLoading()
         }
     }
 }

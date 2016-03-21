@@ -25,11 +25,16 @@ abstract class BaseListViewModel : BaseObservable(), Serializable, AdapterView.O
     var message = ""
     var cursor = ""
     var params: List<Pair<String, Any?>>? = null
-    final var fetchDataResult: ObservableField<FetchDataResult> = ObservableField()
-
+    var fetchDataResult: ObservableField<FetchDataResult> = ObservableField()
     open var dataArray: List<Any> = mutableListOf()
 
-    fun fetchRemoteData() {
+    enum class FetchDataResult() {
+        Normal,
+        Success,
+        Failed
+    }
+
+    open fun fetchRemoteData() {
         this.buildRemoteUrl()
         this.buildParams()
         fetchDataResult.set(FetchDataResult.Normal)
@@ -59,12 +64,5 @@ abstract class BaseListViewModel : BaseObservable(), Serializable, AdapterView.O
     abstract fun buildParams()
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, item: Long) {
-        throw UnsupportedOperationException()
-    }
-
-    enum class FetchDataResult() {
-        Normal,
-        Success,
-        Failed
     }
 }

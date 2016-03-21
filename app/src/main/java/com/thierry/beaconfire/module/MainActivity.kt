@@ -25,6 +25,7 @@ import org.jetbrains.anko.onItemClick
 import android.support.v4.widget.DrawerLayout.DrawerListener
 import android.view.View
 import com.balysv.materialmenu.MaterialMenuDrawable
+import com.thierry.beaconfire.App
 import com.thierry.beaconfire.util.Constants
 
 class MainActivity : BaseActivity(), DrawerListener {
@@ -116,8 +117,10 @@ class MainActivity : BaseActivity(), DrawerListener {
     class AuthBroadcastReceiver(val context: Context) : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent?) {
             if (intent?.action == Constants.Broadcast.LoginExpired) {
-                val mIntent: Intent = Intent(context, LoginActivity::class.java);
-                mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                App.instance.cleanCookie()
+                val mIntent: Intent = Intent(context, LoginActivity::class.java)
+                mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 context.startActivity(mIntent);
             }
         }

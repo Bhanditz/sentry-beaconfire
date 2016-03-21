@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseFragment
-import com.thierry.beaconfire.module.common.BaseWebViewFragment
+import com.thierry.beaconfire.component.BaseWebViewFragment
 import com.thierry.beaconfire.util.Constants
 
 /**

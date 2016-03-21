@@ -4,22 +4,20 @@ import android.view.View
 import android.widget.AdapterView
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
+import com.thierry.beaconfire.R
 import com.thierry.beaconfire.model.IssueBean
-import com.thierry.beaconfire.model.ProjectBean
 import com.thierry.beaconfire.module.common.BaseListViewModel
 import com.thierry.beaconfire.util.Constants
 import org.jetbrains.anko.startActivity
-import java.text.FieldPosition
 
 /**
  * Created by Thierry on 16/3/11.
  */
-class EventListViewModel : BaseListViewModel() {
+class EventListViewModel(val project_slug: String) : BaseListViewModel() {
 
     var statsPeriod = "24h"
     var query = "is:unresolved"
     var limit = 25
-    var project_slug = ""
 
     override fun buildData(dataString: String) {
         dataArray = Gson().fromJson<List<IssueBean>>(dataString)
@@ -48,32 +46,22 @@ class EventListViewModel : BaseListViewModel() {
         return "Events:${issue.count}  Users:${(issue.userCount)}"
     }
 
-    fun getPermalink(position: Int): String {
+    fun getLevelColor(position: Int): Int {
         val issue: IssueBean = dataArray[position] as IssueBean
-        return issue.permalink
+        if (issue.level == "error") {
+            return R.color.LevelError
+        } else if (issue.level == "info") {
+            return R.color.LevelInfo
+        } else if (issue.level == "warning") {
+            return R.color.LevelWarning
+        } else {
+            return R.color.LevelDefault
+        }
     }
 
-    //    fun getTime(position: Int): String
-    //    {
-    //        val issue: IssueBean = dataArray[position] as IssueBean
-    //        let firstSeen = timeAgoSince(Helper.stringToDate(issue.firstSeen))
-    //        let lastSeen = timeAgoSince(Helper.stringToDate(issue.lastSeen))
-    //        return "\(lastSeen) - \(firstSeen)"
-    //    }
-
-    //    func getLevelColorAtIndexPath(indexPath: NSIndexPath) -> String
-    //    {
-    //        let issue: IssueObject = _dataArray[indexPath.row]
-    //        if issue.level == "error"{
-    //            return Color.LevelError
-    //        } else if issue.level == "info"{
-    //            return Color.LevelInfo
-    //        } else if issue.level == "warning"{
-    //            return Color.LevelWarning
-    //        } else {
-    //            return Color.LevelDefault
-    //        }
-    //    }
-
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, item: Long) {
+        val issue: IssueBean = dataArray[position] as IssueBean
+        view?.context?.startActivity<EventDetailActivity>("url" to issue.permalink)
+    }
 
 }

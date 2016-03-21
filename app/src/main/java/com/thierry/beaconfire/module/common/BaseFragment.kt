@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.LocalBroadcastManager
+import android.util.Log
 import android.widget.Toast
 import com.thierry.beaconfire.util.Constants
 
@@ -31,9 +32,8 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    fun toast(message: String) {
-        //        toast(message)
-        Toast.makeText(this.activity, message, 1)
+    fun toastShow(message: String, duration: Int = Toast.LENGTH_LONG) {
+        Toast.makeText(activity, message, duration).show()
     }
 
     /**

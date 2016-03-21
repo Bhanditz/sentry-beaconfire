@@ -6,6 +6,7 @@ import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.util.Log
+import android.widget.Toast
 
 /**
  * Created by Thierry on 16/2/19.
@@ -20,15 +21,22 @@ abstract class BaseActivity : FragmentActivity() {
     }
 
     fun showLoading() {
-        dialog = ProgressDialog.show(this, null, "Loading...")
+        if (this != null) {
+            dialog = ProgressDialog.show(this, null, "Loading...")
+        }
     }
 
     fun hideLoading() {
-        dialog?.dismiss()
+        try {
+            if (dialog != null && dialog!!.isShowing) {
+                dialog?.dismiss()
+            }
+        } catch(e: Exception) {
+        }
     }
 
-    fun toast(message: String) {
-        toast(message)
+    fun toastShow(message: String, duration: Int = Toast.LENGTH_LONG) {
+        Toast.makeText(this, message, duration).show()
     }
 
     /**

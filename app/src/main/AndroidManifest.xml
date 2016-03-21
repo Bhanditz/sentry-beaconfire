@@ -29,6 +29,10 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".module.project.EventListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".module.project.EventDetailActivity"
             android:screenOrientation="portrait">
         </activity>

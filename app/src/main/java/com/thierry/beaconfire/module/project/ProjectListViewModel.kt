@@ -37,5 +37,7 @@ class ProjectListViewModel : BaseListViewModel() {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, item: Long) {
+        val project: ProjectBean = dataArray[position] as ProjectBean
+        view?.context?.startActivity<EventListActivity>("project_slug" to project.slug, "project_name" to project.name)
     }
 }

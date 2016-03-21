@@ -1,9 +1,8 @@
 package com.thierry.beaconfire.module
 
 import android.os.Bundle
-import android.webkit.WebView
 import com.thierry.beaconfire.common.BaseActivity
-import com.thierry.beaconfire.module.common.BaseWebViewFragment
+import com.thierry.beaconfire.component.BaseWebViewFragment
 import com.thierry.beaconfire.util.Constants
 import org.jetbrains.anko.startActivity
 import com.thierry.beaconfire.R

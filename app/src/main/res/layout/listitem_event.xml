@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.thierry.beaconfire.module.project.EventListViewModel"/>
+
+        <variable
+            name="position"
+            type="Integer"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <View
+            android:id="@+id/event_level"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/LevelError"/>
+
+        <TextView
+            android:id="@+id/event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/event_level"
+            android:lines="1"
+            android:text="@{viewModel.getTitle(position)}"
+            android:textColor="@color/FontGray"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/event_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/event_title"
+            android:layout_below="@id/event_title"
+            android:lines="1"
+            android:text="@{viewModel.getDetail(position)}"
+            android:textColor="@color/FontBlack"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/event_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/event_title"
+            android:layout_below="@id/event_detail"
+            android:lines="1"
+            android:text="@{viewModel.getFlag(position)}"
+            android:textColor="@color/FontLightGray"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+</layout>
