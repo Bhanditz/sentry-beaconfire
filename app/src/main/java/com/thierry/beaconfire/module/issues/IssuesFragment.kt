@@ -1,4 +1,4 @@
-package com.thierry.beaconfire.module.project
+package com.thierry.beaconfire.module.issues
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,12 +11,12 @@ import com.thierry.beaconfire.component.ListFragment
 /**
  * Created by Thierry on 16/3/9.
  */
-class ProjectListFragment : BaseFragment() {
+class IssuesFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_container, container, false);
-        val fragment = ListFragment().setItemLayoutId(R.layout.listitem_project).setViewModel(ProjectListViewModel())
-        this.replaceFragmentByTag(R.id.fragment_content, fragment, "projects")
+        val view = inflater?.inflate(R.layout.fragment_container, container, false)
+        val fragment = ListFragment().setItemLayoutId(R.layout.listitem_issues).setViewModel(IssuesViewModel())
+        this.replaceFragmentByTag(R.id.fragment_content, fragment, "settings")
         return view
     }
 

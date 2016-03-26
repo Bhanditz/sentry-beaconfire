@@ -25,6 +25,8 @@ object Constants {
         val New = Host + "/api/0/organizations/${Constants.CurrentOrganization}/issues/new/"
         val Assigned = Host + "/api/0/organizations/${Constants.CurrentOrganization}/members/me/issues/assigned/"
         val Events = Host + "/api/0/projects/${Constants.CurrentOrganization}/%s/issues/"
+        val Bookmarks = Host + "/api/0/organizations/${Constants.CurrentOrganization}/members/me/issues/bookmarked/"
+        val History = Host + "/api/0/organizations/${Constants.CurrentOrganization}/members/me/issues/viewed/"
     }
 
     object Broadcast {

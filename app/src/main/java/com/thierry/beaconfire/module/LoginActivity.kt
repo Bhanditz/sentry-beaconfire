@@ -2,7 +2,7 @@ package com.thierry.beaconfire.module
 
 import android.os.Bundle
 import com.thierry.beaconfire.common.BaseActivity
-import com.thierry.beaconfire.component.BaseWebViewFragment
+import com.thierry.beaconfire.component.WebViewFragment
 import com.thierry.beaconfire.util.Constants
 import org.jetbrains.anko.startActivity
 import com.thierry.beaconfire.R
@@ -14,8 +14,8 @@ class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        val fragment = BaseWebViewFragment(Constants.Web.Login, webViewBlock = { url ->
+        setContentView(R.layout.activity_container)
+        val fragment = WebViewFragment(Constants.Web.Login, webViewBlock = { url ->
             this.shouldOverrideUrlLoading(url)
         })
         this.actionBar.title = "Login"

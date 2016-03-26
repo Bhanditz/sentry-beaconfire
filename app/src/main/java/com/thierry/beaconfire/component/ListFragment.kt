@@ -21,7 +21,7 @@ import org.jetbrains.anko.support.v4.toast
  * Created by Thierry on 16/3/11.
  */
 
-class BaseListFragment() : BaseFragment() {
+class ListFragment() : BaseFragment() {
 
     var listView: ListView? = null
     var viewModel: BaseListViewModel? = null
@@ -35,12 +35,12 @@ class BaseListFragment() : BaseFragment() {
         return view
     }
 
-    fun setViewModel(viewModel: BaseListViewModel): BaseListFragment {
+    fun setViewModel(viewModel: BaseListViewModel): ListFragment {
         this.viewModel = viewModel
         return this
     }
 
-    fun setItemLayoutId(itemLayoutId: Int): BaseListFragment {
+    fun setItemLayoutId(itemLayoutId: Int): ListFragment {
         this.itemLayoutId = itemLayoutId
         return this
     }
@@ -68,7 +68,7 @@ class BaseListFragment() : BaseFragment() {
     fun addKVO() {
         viewModel?.fetchDataResult?.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable, propertyId: Int) {
-                this@BaseListFragment.observeHandler(viewModel!!.fetchDataResult.get())
+                this@ListFragment.observeHandler(viewModel!!.fetchDataResult.get())
             }
         })
     }
@@ -84,8 +84,6 @@ class BaseListFragment() : BaseFragment() {
         } else if (newValue == FetchDataResult.Failed) {
             hideLoading()
             toastShow("Get data failed")
-        } else {
-            hideLoading()
         }
     }
 }

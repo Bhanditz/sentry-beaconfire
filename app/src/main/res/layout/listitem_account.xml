@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.thierry.beaconfire.module.account.AccountViewModel"/>
+
+        <variable
+            name="position"
+            type="Integer"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:lines="1"
+            android:text="@{viewModel.getTitle(position)}"
+            android:textColor="@color/FontBlack"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+</layout>

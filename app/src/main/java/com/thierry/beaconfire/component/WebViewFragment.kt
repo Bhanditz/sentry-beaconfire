@@ -21,7 +21,7 @@ import org.jetbrains.anko.*
  * Created by Thierry on 16/3/10.
  */
 
-open class BaseWebViewFragment(val url: String, val webViewBlock: (url: String) -> Boolean?) : BaseFragment() {
+open class WebViewFragment(val url: String, val webViewBlock: (url: String) -> Boolean?) : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_webview, container, false);
@@ -41,7 +41,7 @@ open class BaseWebViewFragment(val url: String, val webViewBlock: (url: String) 
         }
     }
 
-    private class WebViewClientBase(var context: BaseWebViewFragment) : WebViewClient() {
+    private class WebViewClientBase(var context: WebViewFragment) : WebViewClient() {
 
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
             return context.shouldOverrideUrlLoading(url)

@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v4.widget.DrawerLayout
-import android.widget.ArrayAdapter
 import com.thierry.beaconfire.module.dashboard.DashboardFragment
 import android.widget.ListView
 import com.balysv.materialmenu.MaterialMenuDrawable.Stroke
@@ -18,44 +17,59 @@ import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseActivity
 import com.thierry.beaconfire.common.BaseFragment
 import com.thierry.beaconfire.module.project.ProjectListFragment
-import com.thierry.beaconfire.module.settings.SettingsFragment
+import com.thierry.beaconfire.module.issues.IssuesFragment
 import com.thierry.beaconfire.module.stats.StatsFragment
 import com.thierry.beaconfire.util.bindView
 import org.jetbrains.anko.onItemClick
 import android.support.v4.widget.DrawerLayout.DrawerListener
+import android.view.MenuItem
 import android.view.View
+import android.widget.SimpleAdapter
 import com.balysv.materialmenu.MaterialMenuDrawable
 import com.thierry.beaconfire.App
+import com.thierry.beaconfire.module.account.AccountFragment
 import com.thierry.beaconfire.util.Constants
+import java.util.*
 
 class MainActivity : BaseActivity(), DrawerListener {
 
     var materialMenu: MaterialMenuIcon? = null
     var isDrawerOpened: Boolean = false
     val mDrawerLayout: DrawerLayout by bindView(R.id.drawer_layout)
-    var mFragmentTitles: Array<String>? = null
+    val mFragmentTitles = arrayOf("DashBoard", "Projects", "Stats", "Issues", "Account")
+    val mFragmentIcons = arrayOf(R.drawable.icon_drawer_dashboard, R.drawable.icon_drawer_project, R.drawable.icon_drawer_stats, R.drawable.icon_drawer_issues, R.drawable.icon_drawer_account)
     val mDrawerList: ListView by bindView(R.id.left_drawer);
-    val mFragments: List<BaseFragment> = listOf(DashboardFragment(), ProjectListFragment(), StatsFragment(), SettingsFragment())
-
+    val mFragments: List<BaseFragment> = listOf(DashboardFragment(), ProjectListFragment(), StatsFragment(), IssuesFragment(), AccountFragment())
     var localBroadcastManager: LocalBroadcastManager? = null
     var mBroadcastReceiver: AuthBroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        actionBar.setDisplayHomeAsUpEnabled(true)
         this.drawLeftDrawer()
         this.registerBroadcast()
     }
 
     fun drawLeftDrawer() {
         materialMenu = MaterialMenuIcon(this, Color.WHITE, Stroke.THIN);
-        mFragmentTitles = this.resources.getStringArray(R.array.tabs)
-        mDrawerList.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mFragmentTitles)
+        mDrawerList.adapter = SimpleAdapter(this, getData(), R.layout.listitem_drawer, arrayOf("icon", "title"), intArrayOf(R.id.drawer_icon, R.id.drawer_title));
         mDrawerList.onItemClick { adapterView, view, position, l ->
             this.selectItem(position);
         }
         this.selectItem(0)
         mDrawerLayout.setDrawerListener(this)
+    }
+
+    fun getData(): ArrayList<Map<String, Any>> {
+        val list = ArrayList<Map<String, Any>>()
+        for ((index, title: String) in mFragmentTitles.withIndex()) {
+            val map: HashMap<String, Any> = HashMap()
+            map.put("title", title);
+            map.put("icon", mFragmentIcons[index]);
+            list.add(map)
+        }
+        return list
     }
 
     fun registerBroadcast() {
@@ -69,7 +83,7 @@ class MainActivity : BaseActivity(), DrawerListener {
     fun selectItem(position: Int) {
         this.replaceFragmentByTag(R.id.content_frame, mFragments[position], "fragment" + position)
         mDrawerList.setItemChecked(position, true);
-        actionBar.title = mFragmentTitles!![position];
+        actionBar.title = mFragmentTitles[position];
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
@@ -107,6 +121,19 @@ class MainActivity : BaseActivity(), DrawerListener {
                 materialMenu?.state = MaterialMenuDrawable.IconState.BURGER
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            if (isDrawerOpened) {
+                materialMenu?.state = MaterialMenuDrawable.IconState.ARROW
+                mDrawerLayout.closeDrawer(mDrawerList)
+            } else {
+                materialMenu?.state = MaterialMenuDrawable.IconState.BURGER
+                mDrawerLayout.openDrawer(mDrawerList)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

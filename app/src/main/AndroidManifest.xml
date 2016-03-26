@@ -36,6 +36,18 @@
             android:name=".module.project.EventDetailActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".module.issues.BookmarksActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.issues.AssignedToMeActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.issues.HistoryActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
     </application>
 

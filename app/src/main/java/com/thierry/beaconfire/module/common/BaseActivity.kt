@@ -21,9 +21,7 @@ abstract class BaseActivity : FragmentActivity() {
     }
 
     fun showLoading() {
-        if (this != null) {
-            dialog = ProgressDialog.show(this, null, "Loading...")
-        }
+        dialog = ProgressDialog.show(this, null, "Loading...")
     }
 
     fun hideLoading() {

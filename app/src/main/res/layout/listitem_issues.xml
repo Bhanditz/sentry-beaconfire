@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.thierry.beaconfire.module.project.SettingsListViewModel"/>
+            type="com.thierry.beaconfire.module.issues.IssuesViewModel"/>
 
         <variable
             name="position"
@@ -20,7 +20,6 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/settings_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

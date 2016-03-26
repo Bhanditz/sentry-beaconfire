@@ -3,7 +3,7 @@ package com.thierry.beaconfire.module.project
 import android.os.Bundle
 import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseActivity
-import com.thierry.beaconfire.component.BaseWebViewFragment
+import com.thierry.beaconfire.component.WebViewFragment
 import com.thierry.beaconfire.util.Constants
 
 /**
@@ -16,9 +16,9 @@ class EventDetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_eventdetail)
+        setContentView(R.layout.activity_container)
         actionBar.title = "Event Detail"
-        val fragment = BaseWebViewFragment(this.intent.getStringExtra("url"), webViewBlock = { url -> true })
+        val fragment = WebViewFragment(this.intent.getStringExtra("url"), webViewBlock = { url -> true })
         this.replaceFragmentByTag(R.id.fragment_content, fragment, "event_detail")
     }
 }

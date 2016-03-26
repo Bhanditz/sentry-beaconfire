@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.thierry.beaconfire.common.BaseFragment
 import com.thierry.beaconfire.R
-import com.thierry.beaconfire.component.BaseListFragment
+import com.thierry.beaconfire.component.ListFragment
 import org.jetbrains.anko.find
 
 /**
@@ -36,6 +36,6 @@ class DashboardFragment : BaseFragment() {
         bundle.putSerializable("ViewModel", DashboardViewModel(type))
         bundle.putInt("ItemLayoutId", R.layout.listitem_dashboard)
         mTabHost?.addTab(mTabHost?.newTabSpec(type)?.setIndicator(type),
-                BaseListFragment::class.java, bundle)
+                ListFragment::class.java, bundle)
     }
 }

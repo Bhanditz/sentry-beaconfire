@@ -18,6 +18,7 @@ abstract class BaseFragment : Fragment() {
     var dialog: ProgressDialog? = null
 
     fun showLoading() {
+        Log.d(TAG, "showLoading")
         if (activity != null) {
             dialog = ProgressDialog.show(activity, null, "Loading...")
         }

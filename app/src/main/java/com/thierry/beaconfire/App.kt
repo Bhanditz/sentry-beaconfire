@@ -31,7 +31,6 @@ class App : Application() {
 
     fun cookieExist(): Boolean {
         val cookie = CookieManager.getInstance().getCookie(Constants.Host)
-        Log.d("Application", cookie)
         if (cookie != null && cookie.contains("sentrysid") && cookie.contains("sudo")) {
             return true
         } else {

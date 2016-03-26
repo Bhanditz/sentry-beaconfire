@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.thierry.beaconfire.BR
-import com.thierry.beaconfire.component.BaseListFragment
+import com.thierry.beaconfire.component.ListFragment
 
 /**
  * Created by Thierry on 16/3/12.
  */
-class BaseListAdapter(val fragment: BaseListFragment, val viewModel: BaseListViewModel, val layoutId: Int) : BaseAdapter() {
+class BaseListAdapter(val fragment: ListFragment, val viewModel: BaseListViewModel, val layoutId: Int) : BaseAdapter() {
 
     var inflater: LayoutInflater
 

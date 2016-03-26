@@ -13,11 +13,11 @@ import org.jetbrains.anko.startActivity
 /**
  * Created by Thierry on 16/3/11.
  */
-class EventListViewModel(val project_slug: String) : BaseListViewModel() {
+open class EventListViewModel(val project_slug: String) : BaseListViewModel() {
 
-    var statsPeriod = "24h"
-    var query = "is:unresolved"
-    var limit = 25
+    val statsPeriod = "24h"
+    val query = "is:unresolved"
+    val limit = 25
 
     override fun buildData(dataString: String) {
         dataArray = Gson().fromJson<List<IssueBean>>(dataString)
