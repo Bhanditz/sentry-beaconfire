@@ -1,6 +1,12 @@
 # Sentry Beaconfire
 Kotlin based getsentry/sentry android client, now you can care about your server's error logging and aggregation over the android phone.
 
+<img src="http://7xjlg5.com1.z0.glb.clouddn.com/QQ20160326-4.png" width="140" />
+<img src="http://7xjlg5.com1.z0.glb.clouddn.com/QQ20160326-0.png" width="140" />
+<img src="http://7xjlg5.com1.z0.glb.clouddn.com/QQ20160326-1.png" width="140" />
+<img src="http://7xjlg5.com1.z0.glb.clouddn.com/QQ20160326-2.png" width="140" />
+<img src="http://7xjlg5.com1.z0.glb.clouddn.com/QQ20160326-3.png" width="140" />
+
 ## About Sentry
 [Sentry](https://github.com/getsentry/sentry) is a modern error logging and aggregation platform.
 
