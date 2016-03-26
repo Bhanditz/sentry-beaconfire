@@ -15,13 +15,13 @@ Kotlin based getsentry/sentry android client, now you can care about your server
 Simply replace the defaults with your own sentry server host and organization in Constants.kt
 ```kotlin
 // Default Organization
-val CurrentOrganization = "YOUR_Organization"
+val CurrentOrganization = "YOUR_ORGANIZATION"
 
 // Default Host
 val Host = "YOUR_SENTRY_HOST"
 ```
 ## Sentry Version
-As far as I know it worked well with Sentry 8.0+, but it may compatible with lower version, so if anyone find that please let me know, thank you! 
+As far as I know it worked well with Sentry 8.0+, but it may compatible with lower versions, so if anyone find that please let me know, thank you! 
 
 ## Contribute
 Is just the beginning of Beaconfire, so anyone interested, feel free to fork it and pull requests to me. Let's make it more fun.
