@@ -13,7 +13,7 @@ Kotlin based getsentry/sentry android client, now you can care about your server
 [Sentry](https://github.com/getsentry/sentry) is a modern error logging and aggregation platform.
 
 ## About Project
-* Using Kotlin with MVVMpattern.
+* Using Kotlin with MVVM pattern.
 * Using Android Databinding framework.
 
 ## Feature List
