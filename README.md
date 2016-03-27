@@ -15,7 +15,7 @@ Kotlin based getsentry/sentry android client, now you can care about your server
 ## About Project
 * Using Kotlin with MVVMpattern.
 * Using Android Databinding framework.
-* 
+
 ## Feature List
 * Configure your own sentry server host and organization.
 * Login to your own sentry server.
