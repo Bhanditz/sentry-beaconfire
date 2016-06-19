@@ -36,7 +36,7 @@ val Host = "YOUR_SENTRY_HOST"
 As far as I know it worked well with Sentry 8.0+, but it may compatible with lower versions, so if anyone find that please let me know, thank you! 
 
 ## Contribute
-Is just the beginning of Beaconfire, so anyone interested, feel free to fork it and pull requests to me. Let's make it more fun.
+It is just the beginning of Beaconfire, so anyone interested, feel free to fork it and pull requests to me. Let's make it more fun.
 
 ## Author
 Thierry Xing thierry.xing@gmail.com
