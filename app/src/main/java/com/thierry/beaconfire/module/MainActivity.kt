@@ -4,8 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.util.Log
-import android.graphics.Color;
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v4.widget.DrawerLayout
@@ -38,7 +37,7 @@ class MainActivity : BaseActivity(), DrawerListener {
     val mDrawerLayout: DrawerLayout by bindView(R.id.drawer_layout)
     val mFragmentTitles = arrayOf("DashBoard", "Projects", "Stats", "Issues", "Account")
     val mFragmentIcons = arrayOf(R.drawable.icon_drawer_dashboard, R.drawable.icon_drawer_project, R.drawable.icon_drawer_stats, R.drawable.icon_drawer_issues, R.drawable.icon_drawer_account)
-    val mDrawerList: ListView by bindView(R.id.left_drawer);
+    val mDrawerList: ListView by bindView(R.id.left_drawer)
     val mFragments: List<BaseFragment> = listOf(DashboardFragment(), ProjectListFragment(), StatsFragment(), IssuesFragment(), AccountFragment())
     var localBroadcastManager: LocalBroadcastManager? = null
     var mBroadcastReceiver: AuthBroadcastReceiver? = null
@@ -53,9 +52,9 @@ class MainActivity : BaseActivity(), DrawerListener {
 
     fun drawLeftDrawer() {
         materialMenu = MaterialMenuIcon(this, Color.WHITE, Stroke.THIN);
-        mDrawerList.adapter = SimpleAdapter(this, getData(), R.layout.listitem_drawer, arrayOf("icon", "title"), intArrayOf(R.id.drawer_icon, R.id.drawer_title));
-        mDrawerList.onItemClick { adapterView, view, position, l ->
-            this.selectItem(position);
+        mDrawerList.adapter = SimpleAdapter(this, getData(), R.layout.listitem_drawer, arrayOf("icon", "title"), intArrayOf(R.id.drawer_icon, R.id.drawer_title))
+        mDrawerList.onItemClick { _, _, position, _ ->
+            this.selectItem(position)
         }
         this.selectItem(0)
         mDrawerLayout.setDrawerListener(this)
@@ -65,8 +64,8 @@ class MainActivity : BaseActivity(), DrawerListener {
         val list = ArrayList<Map<String, Any>>()
         for ((index, title: String) in mFragmentTitles.withIndex()) {
             val map: HashMap<String, Any> = HashMap()
-            map.put("title", title);
-            map.put("icon", mFragmentIcons[index]);
+            map.put("title", title)
+            map.put("icon", mFragmentIcons[index])
             list.add(map)
         }
         return list
@@ -75,16 +74,16 @@ class MainActivity : BaseActivity(), DrawerListener {
     fun registerBroadcast() {
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         mBroadcastReceiver = AuthBroadcastReceiver(this)
-        val intentFilter: IntentFilter = IntentFilter();
-        intentFilter.addAction(Constants.Broadcast.LoginExpired);
-        localBroadcastManager?.registerReceiver(mBroadcastReceiver, intentFilter);
+        val intentFilter: IntentFilter = IntentFilter()
+        intentFilter.addAction(Constants.Broadcast.LoginExpired)
+        localBroadcastManager?.registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
     fun selectItem(position: Int) {
         this.replaceFragmentByTag(R.id.content_frame, mFragments[position], "fragment" + position)
-        mDrawerList.setItemChecked(position, true);
-        actionBar.title = mFragmentTitles[position];
-        mDrawerLayout.closeDrawer(mDrawerList);
+        mDrawerList.setItemChecked(position, true)
+        actionBar.title = mFragmentTitles[position]
+        mDrawerLayout.closeDrawer(mDrawerList)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -106,11 +105,11 @@ class MainActivity : BaseActivity(), DrawerListener {
     }
 
     override fun onDrawerOpened(drawerView: View) {
-        isDrawerOpened = true;
+        isDrawerOpened = true
     }
 
     override fun onDrawerClosed(drawerView: View) {
-        isDrawerOpened = false;
+        isDrawerOpened = false
     }
 
     override fun onDrawerStateChanged(newState: Int) {
@@ -137,7 +136,7 @@ class MainActivity : BaseActivity(), DrawerListener {
     }
 
     override fun onDestroy() {
-        super.onDestroy();
+        super.onDestroy()
         localBroadcastManager?.unregisterReceiver(mBroadcastReceiver);
     }
 

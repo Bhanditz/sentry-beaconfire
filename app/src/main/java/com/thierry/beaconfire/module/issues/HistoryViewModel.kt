@@ -6,7 +6,7 @@ import com.thierry.beaconfire.util.Constants
 /**
  * Created by Thierry on 16/3/11.
  */
-class HistoryViewModel() : EventListViewModel("") {
+class HistoryViewModel : EventListViewModel("") {
 
     val per_page = 25
 

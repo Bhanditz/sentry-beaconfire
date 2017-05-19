@@ -28,7 +28,7 @@ abstract class BaseListViewModel : BaseObservable(), Serializable, AdapterView.O
     var fetchDataResult: ObservableField<FetchDataResult> = ObservableField()
     open var dataArray: List<Any> = mutableListOf()
 
-    enum class FetchDataResult() {
+    enum class FetchDataResult {
         Normal,
         Success,
         Failed

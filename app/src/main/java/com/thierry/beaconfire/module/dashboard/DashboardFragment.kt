@@ -19,7 +19,7 @@ class DashboardFragment : BaseFragment() {
     var mTabHost: FragmentTabHost? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_dashboard, container, false);
+        val view = inflater?.inflate(R.layout.fragment_dashboard, container, false)
         mTabHost = view?.find<FragmentTabHost>(R.id.tab_host)
         this.setUpTabs(mTabHost!!)
         return view
