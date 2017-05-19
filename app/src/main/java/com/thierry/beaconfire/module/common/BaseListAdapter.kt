@@ -18,7 +18,7 @@ class BaseListAdapter(val fragment: ListFragment, val viewModel: BaseListViewMod
     var inflater: LayoutInflater
 
     init {
-        inflater = LayoutInflater.from(fragment.activity);
+        inflater = LayoutInflater.from(fragment.activity)
     }
 
     override fun getCount(): Int {
@@ -38,7 +38,7 @@ class BaseListAdapter(val fragment: ListFragment, val viewModel: BaseListViewMod
         var binding: ViewDataBinding?
         if (mConvertView == null) {
             binding = DataBindingUtil.inflate(inflater, layoutId, parent, false)
-            mConvertView = binding?.root;
+            mConvertView = binding?.root
             mConvertView?.tag = binding
         } else {
             binding = mConvertView.tag as ViewDataBinding

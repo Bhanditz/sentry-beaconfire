@@ -1,13 +1,10 @@
 package com.thierry.beaconfire.module
 
 import android.os.Bundle
-import android.util.Log
-import android.webkit.CookieManager
 import com.thierry.beaconfire.App
 import com.thierry.beaconfire.R
 import com.thierry.beaconfire.common.BaseActivity
-import com.thierry.beaconfire.util.Constants
-import org.jetbrains.anko.async
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.uiThread
 
@@ -20,7 +17,7 @@ class LaunchActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
         actionBar.hide()
-        async() {
+        doAsync {
             Thread.sleep(2000)
             uiThread {
                 checkLoginStatus()

@@ -23,19 +23,14 @@ class App : Application() {
         initNet()
     }
 
-
     fun initNet() {
         val service: GMNetService = GMNetService.instance
-        service.apiHost = Constants.Host;
+        service.apiHost = Constants.Host
     }
 
     fun cookieExist(): Boolean {
         val cookie = CookieManager.getInstance().getCookie(Constants.Host)
-        if (cookie != null && cookie.contains("sentrysid") && cookie.contains("sudo")) {
-            return true
-        } else {
-            return false
-        }
+        return (cookie != null && cookie.contains("sentrysid") && cookie.contains("sudo"))
     }
 
     fun cleanCookie() {

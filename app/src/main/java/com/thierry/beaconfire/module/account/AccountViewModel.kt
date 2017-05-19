@@ -19,7 +19,7 @@ import org.jetbrains.anko.startActivity
  */
 class AccountViewModel : BaseListViewModel() {
 
-    val localBroadcastManager = LocalBroadcastManager.getInstance(App.instance);
+    val localBroadcastManager = LocalBroadcastManager.getInstance(App.instance)
 
     override fun fetchRemoteData() {
         dataArray = listOf(SimpleBean("Sign Out", ""))

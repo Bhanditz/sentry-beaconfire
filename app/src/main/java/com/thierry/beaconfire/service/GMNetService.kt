@@ -13,7 +13,8 @@ import com.github.kittinunf.fuel.httpPut
 import com.github.kittinunf.fuel.core.Manager
 import com.thierry.beaconfire.App
 import com.thierry.beaconfire.util.Constants
-import org.jetbrains.anko.*
+import org.jetbrains.anko.custom.async
+import org.jetbrains.anko.uiThread
 
 /** @brief Http状态枚举 */
 enum class HttpStatusCode(val code: Int) {
@@ -50,30 +51,30 @@ class GMNetService private constructor() {
 
     fun doRequest(remoteUrl: String, method: HttpMethod, params: List<Pair<String, Any?>>?, success: (Response) -> Unit, failed: (String) -> Unit) {
         Log.d(TAG, remoteUrl)
-        async() {
+        async {
             Manager.instance.baseHeaders = mapOf("Cookie" to cookieManager.getCookie(apiHost))
             when (method) {
                 HttpMethod.HttpMethodGet ->
-                    remoteUrl.httpGet(params).responseJson { request, response, result ->
-                        uiThread() {
+                    remoteUrl.httpGet(params).responseJson { _, response, _ ->
+                        uiThread {
                             handleResponse(response, success, failed)
                         }
                     }
                 HttpMethod.HttpMethodPost ->
-                    remoteUrl.httpPost(params).responseJson { request, response, result ->
-                        uiThread() {
+                    remoteUrl.httpPost(params).responseJson { _, response, _ ->
+                        uiThread {
                             handleResponse(response, success, failed)
                         }
                     }
                 HttpMethod.HttpMethodDelete ->
-                    remoteUrl.httpDelete(params).responseJson { request, response, result ->
-                        uiThread() {
+                    remoteUrl.httpDelete(params).responseJson { _, response, _ ->
+                        uiThread {
                             handleResponse(response, success, failed)
                         }
                     }
                 HttpMethod.HttpMethodPut ->
                     remoteUrl.httpPut(params).responseJson { request, response, result ->
-                        uiThread() {
+                        uiThread {
                             handleResponse(response, success, failed)
                         }
                     }
@@ -96,7 +97,7 @@ class GMNetService private constructor() {
     }
 
     fun sendLoginExpired() {
-        val intent: Intent = Intent();
+        val intent: Intent = Intent()
         intent.action = Constants.Broadcast.LoginExpired
         localBroadcastManager.sendBroadcast(intent)
     }

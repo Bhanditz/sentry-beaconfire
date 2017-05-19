@@ -15,8 +15,8 @@ import com.thierry.beaconfire.util.Constants
 class StatsFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_container, container, false);
-        val fragment = WebViewFragment(Constants.Web.Stats, webViewBlock = { url -> true })
+        val view = inflater?.inflate(R.layout.fragment_container, container, false)
+        val fragment = WebViewFragment(Constants.Web.Stats, webViewBlock = { _ -> true })
         this.replaceFragmentByTag(R.id.fragment_content, fragment, "stats")
         return view
     }

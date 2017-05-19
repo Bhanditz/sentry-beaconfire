@@ -6,12 +6,10 @@ package com.thierry.beaconfire.util
 object Constants {
 
     // Default Organization
-    val CurrentOrganization = "sentry"
-    //    val CurrentOrganization = "sentry-sc"
+    val CurrentOrganization = "sentry-sc"
 
     // Default Host
-    val Host = "http://sentry.gengmei.cc"
-    //    val Host = "https://app.getsentry.com"
+    val Host = "https://sentry.io"
 
     object Web {
         val Root = Host + "/"

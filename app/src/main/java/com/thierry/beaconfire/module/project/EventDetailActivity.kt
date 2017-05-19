@@ -18,7 +18,7 @@ class EventDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container)
         actionBar.title = "Event Detail"
-        val fragment = WebViewFragment(this.intent.getStringExtra("url"), webViewBlock = { url -> true })
+        val fragment = WebViewFragment(this.intent.getStringExtra("url"), webViewBlock = { _ -> true })
         this.replaceFragmentByTag(R.id.fragment_content, fragment, "event_detail")
     }
 }
